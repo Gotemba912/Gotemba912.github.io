@@ -22,3 +22,8 @@ span.header1{
   height: 100px;
   background-color: #99a6ff;
 }
+
+div.right {
+    text-align: right; 
+    background-color: #99a6ff;
+}
