@@ -7,23 +7,47 @@ span.title_text {
   color: #ffff00;
 }
 
-span.title_text {
-  color: #ffff00;
+span.footer_text {
+  color: #dddddd;
+  text-align: center; 
 }
 
-span.header1{
-  width: 50%;
-  height: 100px;
-  background-color: #99a6ff;
+span.header_text {
+  padding-left: 10px;
+  color: #cfcfcf;
 }
 
-.header2{
-  width: 50%;
-  height: 100px;
-  background-color: #99a6ff;
+h2{
+  padding: 0.5em;
+  color: #4fcdff;
+  background-color: #9d26ff;
+  border-left: solid 5px #ff7cf1;
 }
 
 div.right {
     text-align: right; 
-    background-color: #99a6ff;
+    background-color: #00008d;
+}
+
+div.toto {
+    background-color: #0000d7;
+}
+
+div.github_etc {
+    text-align: right; 
+}
+
+div.pack_flame {
+    background-color: #000066;
+	padding: 10px;
+	display: flex;
+	margin-bottom: 5px;
+}
+
+span.pack_name {
+	font-size: 130%;
+}
+
+a {
+	color: #00ffff;
 }
