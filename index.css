@@ -44,6 +44,10 @@ div.pack_flame {
 	margin-bottom: 5px;
 }
 
+div.text_content {
+	padding-left: 10px;
+}
+
 span.pack_name {
 	font-size: 130%;
 }
