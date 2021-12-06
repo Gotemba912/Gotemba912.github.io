@@ -13,6 +13,11 @@ span.footer_text {
   text-align: center; 
 }
 
+a.footer_text {
+  color: #dddddd;
+  text-align: center; 
+}
+
 span.header_text {
   padding-left: 10px;
   color: #cfcfcf;
