@@ -3,8 +3,9 @@ body {
   color: #ffffff;
 }
 
-span.title_text {
+a.title_text {
   color: #ffff00;
+  text-decoration:none;
 }
 
 span.footer_text {
