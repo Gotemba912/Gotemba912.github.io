@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <title>Discord 作成日時取得</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <link rel="icon" href="/favicon.ico">
+  <meta charset="utf-8" />
+  <meta name="Description" content="Discordのユーザーやチャンネル、サーバー等の作成日時を取得できます！" />
+  <meta name="theme-color" content="#f3fca3" />
+  <meta property="og:description" content="Discordのユーザーやチャンネル、サーバー等の作成日時を取得できます！" />
+  <meta property="og:site_name" content="©Yuka0745" />
+  <meta property="og:title" content="Discord 作成日時取得" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+</head>
+
+<body>
+  <div class="main">
+    <header><img width="48" height="48" src="/textures/app_icon.png" alt="優香のサイトのアイコン"><a class="headertext" href="/">優香のサイト</a></header>
+    <div class="maincontent">
+      <div class="path">
+        <a href="/">TOP</a> → <a href="/benri/">その他雑貨</a> → Discord 作成日時取得
+      </div>
+      <h2>Discord 作成日時取得</h2>
+      <p>
+        このツールは、IDをコピペするだけでかんたんにユーザー、サーバー、チャンネル、メッセージなどの作成日時を取得できます！
+      </p>
+      <h3>作成日時を調べたいIDを入力</h3>
+      <input type="text" id="discordid" value="" placeholder="IDをここにコピペ">
+      <input type="button" value="取得！" onclick="convert()">
+      <div id="resultpanel" class="ishidden">
+        <h3>取得結果</h3>
+        <p>
+          ID <span id="discordid_span" class="pres">ここにIDが出ます</span> の作成日時は<br><br>
+          <span id="result">ここに日時が出ます</span>
+        </p>
+      </div>
+      <hr>
+      <div style="text-align: center;">優香のサイト ©Yuka0745</div>
+    </div>
+  </div>
+  <div style="height: 35px;"></div>
+</body>
+
+<script>
+  function convert() {
+    const input = document.getElementById("discordid").value.trim();
+    const discordid_span = document.getElementById("discordid_span");
+    const result = document.getElementById("result");
+    const resultpanel = document.getElementById("resultpanel");
+
+    if (!/^\d+$/.test(input)) {
+      window.alert("入力されたIDが無効です！");
+      return;
+    }
+
+    try {
+      const discordEpoch = 1420070400000n; // 2015-01-01 00:00:00 UTC
+      const snowflake = BigInt(input);
+      const timestamp = (snowflake >> 22n) + discordEpoch;
+      const date = new Date(Number(timestamp));
+
+
+      const year = date.getFullYear();
+      const month = date.getMonth()+1;
+      const day = date.getDate();
+      const hour = date.getHours();
+      const min = date.getMinutes();
+      const sec = date.getSeconds();
+
+      discordid_span.innerText = input;
+      result.innerText = `${year}/${month < 10 ? "0" : ""}${month}/${day < 10 ? "0" : ""}${day}　${hour < 12 ? `午前 ${hour === 0 ? "12" : hour}`: `午後 ${hour-12 === 0 ? "12" : hour-12}`}:${min < 10 ? "0" : ""}${min}:${sec < 10 ? "0" : ""}${sec}`;
+
+      resultpanel.classList.remove("ishidden");
+    } catch (e) {
+      result.textContent = "取得できませんでした！";
+      window.alert("取得できませんでした！");
+    }
+  }
+</script>
+
+</html>

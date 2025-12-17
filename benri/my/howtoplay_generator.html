@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<title>遊び方画面生成</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://gotemba912.github.io/favicon.ico">
+  <meta charset="utf-8" />
+  <meta name="Description" content="ごて鯖用" />
+  <meta name="theme-color" content="#f3fca3" />
+  <meta property="og:description" content="ごて鯖用" />
+  <meta property="og:site_name" content="©Yuka0745" />
+  <meta property="og:title" content="遊び方画面生成" />
+
+  <style>
+    html, body {
+      color-scheme: dark;
+      background-color: black;
+    }
+
+    h1, h2, h3 {
+      text-align: center;
+    }
+
+    textarea {
+      font-family: "Meiryo";
+      font-size: 14px;
+      resize: none;
+      width: calc(100% - 6px);
+      height: calc(100% - 90px);
+    }
+
+    #leftpanel {
+      position: fixed;
+      top: 80px;
+      left: 10px;
+      width: calc(50% - 20px);
+      height: calc(100% - 45px);
+    }
+
+    #rightpanel {
+      position: fixed;
+      top: 80px;
+      right: 10px;
+      width: calc(50% - 20px);
+      height: calc(100% - 45px);
+    }
+  </style>
+</head>
+
+<body>
+  <h2>遊び方画面生成</h2>
+  <div id="leftpanel">
+    <textarea id="honbun" placeholder="ここに文をコピペ"></textarea>
+    <input type="button" onclick="convert();" value="変換" style="width:100%; height:30px;">
+  </div>
+  <div id="rightpanel">
+    <textarea id="result" readonly></textarea>
+    <input type="button" id="copy_btn" onclick="copy_to_clip();" value="コピーする" style="width:100%; height:30px;" disabled>
+  </div>
+</body>
+<script>
+  function convert() {
+  	let honbun = document.getElementById("honbun").value
+  	let resultbox = document.getElementById("result")
+  	let copybtn = document.getElementById("copy_btn")
+  	copybtn.value = "コピーする";
+  
+  	let resultpanel = "\n"
+  
+  	for (let i = 0; i < honbun.split('\n').length; i++) {
+  		console.log(i)
+  		let currentgyou = honbun.split(/\r\n|\r|\n/)[i].replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\t/g, '\\t')
+  		if (i > 0) resultpanel = resultpanel + ',\n'
+  		if (currentgyou.startsWith('h>')) {
+  			resultpanel = resultpanel + `{ "howtoplay_${i.toString()}@how_to_play_common.header": {"$text": "${currentgyou.replace('h>', '')}"}}`
+  			continue
+  		}
+  
+  		if (currentgyou.startsWith('i>')) {
+  			resultpanel = resultpanel + `{ "howtoplay_${i.toString()}@how_to_play_common.image": {"texture": "${currentgyou.replace('i>', '')}"}}`
+  			continue
+  		}
+
+  		if (currentgyou.startsWith('htp:h>')) {
+  			resultpanel = resultpanel + `{ "howtoplay_${i.toString()}@how_to_play_common.header": {"$text": "${currentgyou.replace('htp:h>', '')}"}}`
+  			continue
+  		}
+  
+  		if (currentgyou.startsWith('htp:i>')) {
+  			resultpanel = resultpanel + `{ "howtoplay_${i.toString()}@how_to_play_common.image": {"texture": "${currentgyou.replace('htp:i>', '')}"}}`
+  			continue
+  		}
+
+  		if (currentgyou.startsWith('- ')) {
+  			resultpanel = resultpanel + `{ "howtoplay_${i.toString()}@how_to_play_common.features_text_with_bubble": {"$text": "${currentgyou.replace('- ', '')}"}}`
+  			continue
+  		}
+
+      if (currentgyou === "***") {
+  			resultpanel = resultpanel + `{ "howtoplay_${i.toString()}@how_to_play_common.divider": {}}`
+  			continue
+      }
+
+      if (currentgyou === "") {
+  			resultpanel = resultpanel + `{ "howtoplay_${i.toString()}@how_to_play_common.padding": {}}`
+  			continue
+      }
+  
+  		resultpanel = resultpanel + `{ "howtoplay_${i.toString()}@how_to_play_common.paragraph": {"$text": "${currentgyou}"}}`
+  	}
+  	resultbox.value = resultpanel
+  	copybtn.disabled = false
+  }
+  
+  function copy_to_clip() {
+  	let resultbox = document.getElementById("result")
+  	let copybtn = document.getElementById("copy_btn")
+  	if (navigator.clipboard) {
+  		navigator.clipboard.writeText(resultbox.value)
+  		copybtn.value = "コピーしました!";
+  	}
+  }
+</script>
+</html>

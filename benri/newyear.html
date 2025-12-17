@@ -1,0 +1,79 @@
+<html lang="ja">
+
+<head>
+  <title>新年までのカウントダウン</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="Description" content="新年まであと何日何時間何分何秒かを見ることができます!
+また、新年からどのくらい経ったか見ることもできます!" />
+  <meta name="theme-color" content="#f3fca3" />
+  <meta property="og:description" content="新年まであと何日何時間何分何秒かを見ることができます!
+また、新年からどのくらい経ったか見ることもできます!" />
+  <meta property="og:site_name" content="©Yuka0745" />
+  <meta property="og:title" content="新年までのカウントダウン" />
+  <meta property="og:image" content="/textures/app_icon.png"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  
+
+  <style>
+    #countdown_panel, #happynewyear_panel {
+      font-family: 'Yusei Magic', sans-serif;
+      text-align: center;
+    }
+    #countdown_panel {
+      font-size: 20pt;
+    }
+    span.red {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <header><img width="48" height="48" src="/textures/app_icon.png" alt="優香のサイトのアイコン"><a class="headertext" href="/">優香のサイト</a></header>
+    <div class="maincontent">
+      <div class="path">
+        <a href="/">TOP</a> → <a href="/benri/">その他雑貨</a> → 新年までのカウントダウン
+      </div>
+      <h2>新年までのカウントダウン</h2>
+      <form>
+        <input type="number" name="year" id="year" min="1900" value="10" style="width:100%; height:25px;" required>
+        <input type="submit" value="適用" style="width:100%; height:30px;">
+
+      </form>
+
+      <div id="countdown_panel" style="display: none;">
+        <span class="red" id="cd_nextyear"></span>年まであと...<br>
+        <span class="red" id="cd_days"></span>日 <span class="red" id="cd_hour"></span>時間<span class="red" id="cd_min"></span>分<span class="red" id="cd_sec"></span>秒!!
+      </div>
+      <div id="happynewyear_panel" style="display: none;">
+        <span style="color: red;font-weight: bold;font-size: 20pt;">🎊 Happy New Year <span id="cu_newyear"></span>!! 🎉</span><br>
+        <span id="cu_days"></span>日 <span id="cu_hour"></span>時間<span id="cu_min"></span>分<span id="cu_sec"></span>秒経過
+      </div>
+
+      <p>
+        <span style="text-decoration: underline; cursor: pointer; color: #0000ee;" onclick="location.href=location.href.replace('newyear.html','newyear_full.html')">全画面で表示する。</span><br>
+        ※PCのフルスクリーン向け<br>
+        ディスプレイサイズが小さかったり文字サイズが大きいと見切れるかもしれないのでズーム調整お願いします
+      </p>
+
+      <h2>変更履歴</h2>
+
+      2022/11/19 - リリース<br>
+      2024/12/08 - 改修<br>
+      <hr>
+      <div style="text-align: center;">優香のサイト ©Yuka0745</div>
+    </div>
+  </div>
+  <div style="height: 35px;"></div>
+</body>
+
+<script>const full = false;</script>
+<script src="./newyear.js"></script>
+</html>
