@@ -29,7 +29,7 @@ function newYearCountdown(newYearVal = 2025) {
   const now =new Date();
 
   if (now.getFullYear() < newYearVal) {
-    const newYear = new Date(newYearVal, 0, 1, 0, 0, 0, 0);
+    const newYear = new Date(newYearVal, 0, 1, 0, 0, 1, 0);
     const countDown = newYear.getTime() - now.getTime();
     const countDate = Math.floor(countDown / 86400000);
     const countHour = Math.floor(countDown / 3600000) % 24;
