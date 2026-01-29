@@ -1,0 +1,241 @@
+body {
+  font-family: Meiryo, Arial, Helvetica, sans-serif;
+}
+/* ===== ライトテーマ ===== */
+:root {
+  --bg: #ffffff;
+  --text: #222;
+  --track-off: #ccc;
+  --track-on: #4f8cff;
+  --thumb: #fff;
+  --muted: #666;
+
+  --border: #ccc;
+  --border-focus: #4f8cff;
+
+  --input-bg: #f8f8f8;
+  --shadow: rgba(0, 0, 0, 0.08);
+}
+
+/* ===== ダークテーマ ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1e1e1e;
+    --text: #eee;
+    --track-off: #555;
+    --track-on: #4f8cff;
+    --thumb: #fff;
+    --bg: #1e1e1e;
+    --muted: #aaa;
+
+    --border: #555;
+    --border-focus: #4f8cff;
+
+    --input-bg: #2a2a2a;
+    --shadow: rgba(0, 0, 0, 0.35);
+  }
+  
+  body {
+    background-color: #222;
+    color: white;
+  }
+
+  hr {
+    border-color: #1e1e1e;
+  }
+}
+
+a {
+  color: var(--border-focus);
+}
+
+/* ===== toggle全体 ===== */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 16px;
+  color: var(--text);
+}
+
+/* inputを隠す */
+.toggle input {
+  display: none;
+}
+
+/* ===== スイッチの土台 ===== */
+.slider {
+  width: 50px;
+  height: 28px;
+  background: var(--track-off);
+  border-radius: 999px;
+  position: relative;
+  transition: background 0.25s ease;
+}
+
+/* ===== 丸いボタン部分 ===== */
+.slider::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  background: var(--thumb);
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  transition: transform 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== ON状態 ===== */
+.toggle input:checked+.slider {
+  background: var(--track-on);
+}
+
+/* 丸が右に動く */
+.toggle input:checked+.slider::before {
+  transform: translateX(20px);
+}
+
+/* ラベル文字 */
+.label-text {
+  line-height: 1;
+}
+
+/* ===== 入力フィールド全体 ===== */
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text);
+  width: 100%;
+}
+
+/* タイトル */
+.input-field .title {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ===== input本体 ===== */
+.input-field input {
+  padding: 10px 14px;
+  font-size: 15px;
+  border-radius: 12px;
+
+  border: 1.5px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text);
+
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* hover */
+.input-field input:hover {
+  border-color: var(--border-focus);
+}
+
+/* focus */
+.input-field input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 4px rgba(79, 140, 255, 0.25);
+}
+
+/* placeholder */
+.input-field input::placeholder {
+  color: var(--muted);
+}
+
+.select-wrap {
+  position: relative;
+}
+
+.select-wrap select {
+  width: 100%;
+  padding: 10px 42px 10px 14px;
+  font-size: 15px;
+  border-radius: 12px;
+
+  border: 1.5px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text);
+
+  outline: none;
+  transition: all 0.2s ease;
+
+  appearance: none;
+  /* デフォの矢印を消す */
+  cursor: pointer;
+}
+
+/* hover */
+.select-wrap select:hover {
+  border-color: var(--border-focus);
+}
+
+/* focus */
+.select-wrap select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 4px rgba(79, 140, 255, 0.25);
+}
+
+/* ▼矢印（CSSで作る） */
+.select-wrap::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: translateY(-60%) rotate(45deg);
+  pointer-events: none;
+}
+
+.btn-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10px 16px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: transform .08s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+  user-select: none;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Primary */
+.btn.primary {
+  background: var(--border-focus);
+  color: #fff;
+  box-shadow: 0 8px 18px var(--shadow);
+}
+
+.btn.primary:hover {
+  box-shadow: 0 10px 22px var(--shadow);
+}
+
+/* Secondary */
+.btn.secondary {
+  background: var(--input-bg);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.btn.secondary:hover {
+  border-color: var(--border-focus);
+}
