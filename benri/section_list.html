@@ -19,6 +19,9 @@
       <div class="htp_header">
         マイクラ統合版 セクション装飾一覧表
       </div>
+      <div class="path">
+        <a href="/">TOP</a> → <a href="/benri/">その他雑貨</a> → マイクラ統合版 セクション装飾一覧表
+      </div>
       <p>
         マイクラ統合版では、<span style="color: #54ff54">看板や本と羽ペン、ワールド名</span>など、様々な場面で<span style="color: #ffff54">装飾</span>を使うことが出来ます。<br>
         装飾では、<span style="color: #54ffff">文字の色</span>を変えたり、<span style="color: #54ffff; font-weight: bold;">太字や斜体</span>にしたりできます。<br>
@@ -269,10 +272,6 @@
     font-family: 'Mojangles';
     src: url(./font/Mojangles.ttf);
   }
-  @font-face {
-    font-family: 'Unifont';
-    src: url(./font/unifont.ttf);
-  }
 
   html {
     color-scheme: dark;
@@ -281,12 +280,12 @@
 
   body {
     color: white;
-    font-family: 'Mojangles', 'Unifont', sans-serif;
+    font-family: 'Mojangles', 'Meiryo', sans-serif;
     font-size: 14pt;
   }
 
   textarea {
-    font-family: 'Mojangles', 'Unifont', sans-serif;
+    font-family: 'Mojangles', 'Meiryo', sans-serif;
     font-size: 20px;
     width: calc(100% - 20px);
     height: 300px;
@@ -309,7 +308,7 @@
   }
 
   tr:hover {
-    -webkit-text-stroke: 1px white;
+    color: #ffffff!important;
   }
   
   div.htp_header {
