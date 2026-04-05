@@ -112,6 +112,13 @@
   </div>
   <div class="toggleset">
     <label class="toggle">
+      <input type="checkbox" id="show_hotbar_paperdoll">
+      <span class="slider"></span>
+      <span class="label-text">ホットバーの左に人形を表示</span>
+    </label>
+  </div>
+  <div class="toggleset">
+    <label class="toggle">
       <input type="checkbox" id="show_locked_trade_items">
       <span class="slider"></span>
       <span class="label-text">未解放の取引アイテムをプレビュー表示</span>
@@ -215,6 +222,7 @@
       document.getElementById("chest_screen_paperdoll").checked = true
       document.getElementById("show_hotbar_navigator").checked = false
       document.getElementById("show_hotbar_number").checked = false
+      document.getElementById("show_hotbar_paperdoll").checked = false
       document.getElementById("play_screen_doubleclick").checked = false
       document.getElementById("show_recoverycompass").checked = false
       document.getElementById("show_locked_trade_items").checked = true
@@ -234,6 +242,7 @@
       document.getElementById("chest_screen_paperdoll").checked = true
       document.getElementById("show_hotbar_navigator").checked = false
       document.getElementById("show_hotbar_number").checked = false
+      document.getElementById("show_hotbar_paperdoll").checked = false
       document.getElementById("play_screen_doubleclick").checked = false
       document.getElementById("show_recoverycompass").checked = false
       document.getElementById("show_locked_trade_items").checked = true
@@ -256,6 +265,7 @@
       "$chest_screen_paperdoll": getCheck("chest_screen_paperdoll"),
       "$show_hotbar_navigator": getCheck("show_hotbar_navigator"),
       "$show_hotbar_number": getCheck("show_hotbar_number"),
+      "$show_hotbar_paperdoll": getCheck("show_hotbar_paperdoll"),
       "$play_screen_doubleclick": getCheck("play_screen_doubleclick"),
       "$show_recoverycompass": getCheck("show_recoverycompass"),
       "$show_locked_trade_items": getCheck("show_locked_trade_items"),
@@ -265,11 +275,12 @@
       "$playerlist_key": document.getElementById("playerlist_key").selectedOptions[0].id
     }
 
+    const now = new Date();
     let manifestjson = JSON.stringify({
       format_version: 2,
       header: {
         name: packname === "" ? "Gote-Supporter Config Pack" : packname,
-        description: "Gote-SupporterをカスタマイズできるConfigパックです！\nGote-Supporter Config ジェネレーターで生成\nby Yuka0745",
+        description: `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()} に生成\n` + "Gote-SupporterをカスタマイズできるConfigパックです！\nGote-Supporter Config ジェネレーターで生成\nby Yuka0745",
         version: [ 1, 0, 0 ],
         uuid: generateUUID(),
         min_engine_version: [ 1, 13, 0 ],
@@ -285,7 +296,7 @@
       metadata: {
         url: "https://gotemba912.github.io/minecraft_addons/gote-supporter-config/",
         generated_with: {
-          "Gote-Supporter_ConfigGenerator": ["1.1.0"]
+          "Gote-Supporter_ConfigGenerator": ["1.7.6"]
         }
       }
     },null, 2);
@@ -304,6 +315,14 @@
       URL.revokeObjectURL(link.href)
     })
   }
+
+  document.getElementById("enable_force_trade").addEventListener('click', (e) => {
+    if (e.target.checked === true) {
+      if (!window.confirm("⚠️注意⚠️\nこれをオンにすると、取引の面白さがなくなる可能性があります！\nまた、これをマルチプレイサーバーで使用するとBANされるかもしれません。\nこの機能を使ったことにより起こった問題について、作者Yuka0745は一切責任を負いませんので、自己責任で、お願いしますね！")) {
+        e.target.checked = false;
+      }
+    }
+  })
 </script>
 
 </html>
