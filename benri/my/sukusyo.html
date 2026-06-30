@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://gotemba912.github.io/favicon.ico">
+  <title>スクショ</title>
+
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+</head>
+<body>
+  やぁりましょうを押すか、Ctrl+Vを押してね<br>
+  <input type="button" value="やぁりましょう" onclick="cropClipboardImage()" style="width: 100%; height: 500px;">
+  <br><br>
+  <span id="status"></span>
+</body>
+<script>
+// クリップボードの画像を読み込んで
+// 左上から1920x1080切り抜き
+// 切り抜き後の画像をクリップボードへコピーする
+
+const statuses = document.getElementById("status");
+
+async function cropClipboardImage() {
+    statuses.innerText = "処理中・・・";
+    try {
+        // クリップボード読み込み
+        const items = await navigator.clipboard.read();
+
+        for (const item of items) {
+            const imageType = item.types.find(type => type.startsWith("image/"));
+
+            if (!imageType) continue;
+
+            // Blob取得
+            const blob = await item.getType(imageType);
+
+            // ImageBitmap化
+            const imageBitmap = await createImageBitmap(blob);
+
+            // Canvas作成
+            const canvas = document.createElement("canvas");
+            canvas.width = 1920;
+            canvas.height = 1080;
+
+            const ctx = canvas.getContext("2d");
+
+            // 左上から1920x1080切り抜き
+            ctx.drawImage(
+                imageBitmap,
+                0, 0, 1920, 1080,
+                0, 0, 1920, 1080
+            );
+
+            // Blob化
+            const croppedBlob = await new Promise(resolve => {
+                canvas.toBlob(resolve, "image/png");
+            });
+
+            // クリップボードへコピー
+            await navigator.clipboard.write([
+                new ClipboardItem({
+                    "image/png": croppedBlob
+                })
+            ]);
+
+            statuses.innerText = "クリップボードにコピーしました";
+            return;
+        }
+
+        statuses.innerText = "クリップボードに画像がなかったよ";
+        return;
+    } catch (err) {
+      statuses.innerText = "クリップボードにコピーできなかった。" + err;
+      return;
+    }
+}
+
+document.addEventListener("keydown", async (event) => {
+    // Ctrl+V 判定
+    if (!(event.ctrlKey && event.key.toLowerCase() === "v")) return;
+
+    event.preventDefault();
+
+    cropClipboardImage();
+})
+</script>
+</html>
